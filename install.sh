@@ -8,8 +8,8 @@ export DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $DIR/config.sh
  
 echo "Configuring /etc/hosts ..."
-echo "127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4" > /etc/hosts
-echo "::1   localhost localhost.localdomain localhost6 localhost6.localdomain6" >> /etc/hosts
+echo "127.0.0.1 localhost localhost.localdomain.local localhost4 localhost4.localdomain4" > /etc/hosts
+echo "::1   localhost localhost.localdomain.local localhost6 localhost6.localdomain6" >> /etc/hosts
 echo "$SERVER_IP_ADDR    $SERVER_FQDN $SERVER_NAME" >> /etc/hosts
  
 echo "Configuring /etc/resolv.conf"
@@ -18,9 +18,6 @@ echo "nameserver $SERVER_IP_ADDR" >> /etc/resolv.conf
 echo "nameserver $FORWARDER" >> /etc/resolv.conf
 echo "nameserver 8.8.4.4" >> /etc/resolv.conf
  
-#echo "Disabling updates-testing repo ..."
-#sed -i 's/enabled=1/enabled=0/g' /etc/yum.repos.d/fedora-updates-testing.repo
-
 echo "Downloading IPA rpms ..."
 yum install -y freeipa-server bind bind-dyndb-ldap
  
