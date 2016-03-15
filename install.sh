@@ -11,6 +11,11 @@ echo "Configuring /etc/hosts ..."
 echo "127.0.0.1 localhost localhost.localdomain.local localhost4 localhost4.localdomain4" > /etc/hosts
 echo "::1   localhost localhost.localdomain.local localhost6 localhost6.localdomain6" >> /etc/hosts
 echo "$SERVER_IP_ADDR    $SERVER_FQDN $SERVER_NAME" >> /etc/hosts
+
+echo "Configuring /etc/sysconfig/network ..."
+echo "NETWORKING=yes" >> /etc/sysconfig/network
+echo "HOSTNAME=$SERVER_FQDN" >> /etc/sysconfig/network
+echo "GATEWAY=$FORWARDER" >> /etc/sysconfig/network
  
 echo "Configuring /etc/resolv.conf"
 echo "search $IPA_DOMAIN" > /etc/resolv.conf
