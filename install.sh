@@ -50,6 +50,8 @@ firewall-cmd --zone=public --add-port  88/udp
 firewall-cmd --zone=public --add-port 464/udp
 firewall-cmd --zone=public --add-port  53/udp
 firewall-cmd --zone=public --add-port 123/udp
+
+firewall-cmd --set-default-zone=public
  
 echo "Installing IPA server ..."
 ipa-server-install --setup-dns --forwarder=$FORWARDER -r $IPA_REALM --hostname=$SERVER_FQDN -n $IPA_DOMAIN -a $PASSWORD -p $PASSWORD -U
