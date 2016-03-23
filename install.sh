@@ -52,9 +52,13 @@ firewall-cmd --zone=public --add-port  53/udp
 firewall-cmd --zone=public --add-port 123/udp
 
 firewall-cmd --set-default-zone=public
+
+mv /etc/sysconfig/network-scripts/ifcfg-enp0s3 /etc/sysconfig/network-scripts/enp0s3 # Somehow the initial ifcfg is wrong.  Just deactivate it
+systemctl start network
+ip addr add $SERVER_IP_ADDR/24 dev enp0s8 # Add ip address.
  
 echo "Installing IPA server ..."
-ipa-server-install --setup-dns --forwarder=$FORWARDER -r $IPA_REALM --hostname=$SERVER_FQDN -n $IPA_DOMAIN -a $PASSWORD -p $PASSWORD -U
+ipa-server-install --setup-dns --forwarder=8.8.8.8 -r $IPA_REALM --hostname=$SERVER_FQDN -n $IPA_DOMAIN -a $PASSWORD -p $PASSWORD -U
 
 echo "Testing kinit"
 echo $PASSWORD | kinit admin
